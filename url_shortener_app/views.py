@@ -1,6 +1,6 @@
 import random
 import string
-
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django import forms
@@ -37,7 +37,7 @@ def create_user(request):
     if form.is_bound and form.is_valid():
         user = form.save()
         login(request, user)
-        return redirect('./url-tool')
+        return redirect(settings.LOGIN_REDIRECT_URL)
     return render(request, 'register.html', {'form': form})
 
 
